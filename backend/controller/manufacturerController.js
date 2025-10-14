@@ -88,6 +88,7 @@ const updateManufacturer = async (req, res) => {
         $set: {
           name: req.body.name,
           country: req.body.country,
+          position: req.body.position,
           contact_name: req.body.contact_name,
           email: req.body.email,
           mobile: req.body.mobile,
