@@ -174,7 +174,7 @@ const ManufacturerDetails = () => {
           </h2>
           <p>
             <strong>Has Agent:</strong>{" "}
-            {manufacturer.has_agent ? manufacturer.agent || "Available" : "No"}
+            {manufacturer.has_agent ? manufacturer.agent || "Yes" : "No"}
           </p>
           <p>
             <strong>Description:</strong>{" "}
