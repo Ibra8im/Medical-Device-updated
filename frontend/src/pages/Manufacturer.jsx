@@ -99,12 +99,7 @@ const Manufacturers = () => {
             <div className="flex gap-2 mt-4">
 
 
-              <button
-                onClick={() => handleDelete(m._id)}
-                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition"
-              >
-                <FiTrash2 /> Delete
-              </button>
+
             </div>
           </motion.div>
         ))}

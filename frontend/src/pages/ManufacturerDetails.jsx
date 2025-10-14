@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { FiTrash2 } from "react-icons/fi";
 
 const placeholderImage =
   "https://cdn-icons-png.freepik.com/256/11680/11680860.png?semt=ais_white_label";
@@ -191,19 +192,19 @@ const ManufacturerDetails = () => {
           <p>
             <strong>Position:</strong> {manufacturer.position || "N/A"}
           </p>
-          <p>
+          <p className="flex items-center gap-2 ">
             <Mail className="w-4 h-4" /> {manufacturer.email || "No email"}
           </p>
-          <p>
+          <p className="flex items-center gap-2 ">
             <Phone className="w-4 h-4" /> {manufacturer.mobile || "No mobile"}
           </p>
-          <p>
+          <p className="flex items-center gap-2 ">
             <strong>Telephone:</strong> {manufacturer.telephone || "N/A"}
           </p>
-          <p>
+          <p className="flex items-center gap-2 ">
             <MapPin className="w-4 h-4" /> {manufacturer.address || "No address"}
           </p>
-          <p>
+          <p className="flex items-center gap-2 ">
             <Globe className="w-4 h-4" /> {manufacturer.website || "No website"}
           </p>
         </div>
@@ -250,6 +251,12 @@ const ManufacturerDetails = () => {
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 transition"
         >
           Edit
+        </button>
+        <button
+          onClick={() => handleDelete(id)}
+          className=" flex items-center justify-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition"
+        >
+          <FiTrash2 /> Delete
         </button>
         <button
           onClick={handleDownloadPDF}
