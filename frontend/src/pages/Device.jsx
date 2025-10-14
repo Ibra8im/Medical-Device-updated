@@ -33,7 +33,6 @@ const Device = () => {
       if (response.data.success) {
         const data = response.data.devices
         setDevices(data)
-        setDeviceLength(data)
         setFilteredDevices(data)
         const uniqueCategories = [...new Set(data.map(d => d.category).filter(Boolean))]
         setCategories(uniqueCategories)
@@ -289,7 +288,7 @@ const Device = () => {
                 />
                 <div className='p-4 space-y-1'>
                   <h3 className='text-lg font-semibold'>{device.name}</h3>
-                  <p className='text-sm text-gray-600'>{device.manufacturer.name}  ({device.manufacturer.country})</p>
+                  <p className='text-sm text-gray-600'>{device.manufacturer.name ?? 'N/A'}  ({device.manufacturer.country ?? 'N/A'})</p>
                   <p className='text-sm text-gray-600'>{device.category} / {device.subcategory}</p>
                   <p className='text-sm'><strong>Price:</strong> {device.price ?? 'N/A'} SAR</p>
                   {device.register ? <p className='text-sm text-green-500'><strong>Registered</strong>  </p> : <p className='text-sm text-red-400'><strong>Not-Registered</strong>  </p>}
