@@ -63,7 +63,7 @@ const AddDevice = () => {
   useEffect(() => {
     fetchManufacturers();
     fetchSuppliers();
-  }, [backendUrl]);
+  }, [backendUrl,]);
 
 
 
@@ -241,47 +241,60 @@ const AddDevice = () => {
 
           {/* Category & Subcategory */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* قائمة الفئات */}
+            {/* Category */}
             <div>
               <label className="block text-gray-800 text-sm font-medium mb-1">
                 Category
               </label>
-              <select
-                value={deviceForm.category}
-                onChange={(e) => handleInputChange("category", e.target.value)}
-                className="w-full px-4 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent appearance-none transition"
-              >
-                <option value="">Select category</option>
-                {categories.map((cat, index) => (
-                  <option key={index} value={cat.name}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+              <Select
+                options={categories.map(cat => ({
+                  value: cat.name,
+                  label: cat.name,
+                }))}
+                value={
+                  deviceForm.category
+                    ? { value: deviceForm.category, label: deviceForm.category }
+                    : null
+                }
+                onChange={(selected) => {
+                  handleInputChange('category', selected ? selected.value : '');
+                  handleInputChange('subcategory', ''); // reset subcategory when category changes
+                }}
+                placeholder="Select category..."
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
             </div>
 
-            {/* قائمة الفئات الفرعية */}
+            {/* Subcategory */}
             <div>
               <label className="block text-gray-800 text-sm font-medium mb-1">
                 Sub-Category
               </label>
-              <select
-                value={deviceForm.subcategory}
-                onChange={(e) => handleInputChange("subcategory", e.target.value)}
-                className="w-full px-4 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent appearance-none transition"
-                disabled={!deviceForm.category}
-              >
-                <option value="">Select sub-category</option>
-                {categories
-                  .find((cat) => cat.name === deviceForm.category)
-                  ?.subcategories.map((sub, index) => (
-                    <option key={index} value={sub}>
-                      {sub}
-                    </option>
-                  ))}
-              </select>
+              <Select
+                options={
+                  categories
+                    .find(cat => cat.name === deviceForm.category)
+                    ?.subcategories.map(sub => ({ value: sub, label: sub })) || []
+                }
+                value={
+                  deviceForm.subcategory
+                    ? { value: deviceForm.subcategory, label: deviceForm.subcategory }
+                    : null
+                }
+                onChange={(selected) =>
+                  handleInputChange('subcategory', selected ? selected.value : '')
+                }
+                placeholder={
+                  deviceForm.category ? 'Select sub-category...' : 'Select category first'
+                }
+                isDisabled={!deviceForm.category}
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
             </div>
           </div>
+
 
           {/* Manufacturer & Supplier */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -314,7 +327,7 @@ const AddDevice = () => {
                   options={supplierOptions}
                   value={deviceForm.supplier}
                   onChange={(selected) => handleInputChange('supplier', selected)}
-                  placeholder="Select suppliers..."
+                  placeholder="Select distributors..."
                   className="basic-multi-select"
                   classNamePrefix="select"
                 />

@@ -49,7 +49,7 @@ const AddEditManufacturer = () => {
 
   useEffect(() => {
     fetchDistributors();
-  }, [backendUrl, addSup]);
+  }, [backendUrl, popup]);
 
   // ✅ جلب بيانات المصنع عند التعديل
   useEffect(() => {
@@ -450,13 +450,13 @@ const AddEditManufacturer = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 40 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-lg p-6 relative"
+              className="bg-white rounded-2xl shadow-2xl w-[100%] max-w-lg p-6 relative"
             >
               <button
                 onClick={() => setPopup(false)}
-                className="absolute top-20 right-20 text-black hover:text-gray-700 text-4xl font-bold"
+                className="absolute bottom-15  right-50 text-black hover:text-gray-700 text-base font-bold"
               >
-                ×
+                close
               </button>
               <AddSupplier
                 isOpen={popup}

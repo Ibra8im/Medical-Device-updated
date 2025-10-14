@@ -137,6 +137,7 @@ export const category = [
       "Sample racks (metal or plastic)",
       "Drying rack for glassware",
       "Weighing paper / boats",
+      "Other",
 
     ]
   },
@@ -234,13 +235,5 @@ export const category = [
 
     ]
   },
-  {
-    "name": "Patient Care Equipment",
-    "subcategories": [
-      "Infusion Pumps",
-      "Defibrillators",
-      "Patient Monitors",
-      "Hospital Beds"
-    ]
-  }
+
 ];
