@@ -23,7 +23,7 @@ const Auth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsDisabled(true)
+    setIsDisabled(true);
     try {
       const endpoint = isLogin ? "login" : "register";
       const { data } = await axios.post(
@@ -109,7 +109,7 @@ const Auth = () => {
 
             <button
               type="submit"
-              className={`w-full py-2.5 rounded-lg ${isDisabled ? "bg-indigo-300 cursor-not-allowed" : ""} bg-indigo-600  hover:bg-indigo-500 text-white font-semibold transition-all cursor-pointer`}
+              className={`w-full py-2.5 rounded-lg ${isDisabled ? "bg-indigo-300 cursor-not-allowed" : " bg-indigo-600  hover:bg-indigo-500 cursor-pointer"}  text-white font-semibold transition-all `}
             >
               {isLogin ? "Sign In" : "Register"}
             </button>
