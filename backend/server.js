@@ -34,10 +34,14 @@ app.use('/api/distributor', distributorRouter)
 const frontendPath = path.join(__dirname, '../frontend/dist')
 
 // serve static files and fallback to index.html
+// serve static files
 app.use(express.static(frontendPath))
-app.get('*', (req, res) => {
+
+// catch-all route for React Router
+app.use((req, res, next) => {
   res.sendFile(path.join(frontendPath, 'index.html'))
 })
+
 
 // تشغيل السيرفر
 app.listen(port, () => {
