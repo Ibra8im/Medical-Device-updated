@@ -13,7 +13,6 @@ import userRouter from './routes/userRoute.js'
 const app = express()
 const port = process.env.PORT || 5000
 
-// إعداد المسارات المطلقة
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -24,24 +23,28 @@ app.use(express.json())
 // اتصال بقاعدة البيانات
 ConnectDb()
 
-// ✅ API Routes
+// API Routes
 app.use('/api/auth', userRouter)
 app.use('/api/device', deviceRouter)
 app.use('/api/manufacturer', manufacturerRouter)
 app.use('/api/distributor', distributorRouter)
 
-// ✅ React Build Path (Vite)
+// React Build Path داخل backend
 const frontendPath = path.join(__dirname, '../frontend/dist')
 
-// serve static files and fallback to index.html
-// serve static files
+// تحقق من وجود المجلد
+import fs from 'fs'
+if (!fs.existsSync(frontendPath)) {
+  console.error('❌ frontend/dist folder not found at:', frontendPath)
+}
+
+// Serve static files
 app.use(express.static(frontendPath))
 
-// catch-all route for React Router
-app.use((req, res, next) => {
+// Catch-all route لأي مسار React Router
+app.use((req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'))
 })
-
 
 // تشغيل السيرفر
 app.listen(port, () => {

@@ -28,7 +28,7 @@ const App = () => {
     <>
       {!hideNavbar && <Navbar />}
 
-      <Routes>
+      <Routes basename="tothepoint_login">
         <Route path="/" element={<Home />} />
         <Route path="/device" element={
           <ProtectedRoute allowedRoles={["Admin", "User"]}>
