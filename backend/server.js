@@ -8,7 +8,7 @@ import ConnectDb from './config/connectDb.js'
 import deviceRouter from './routes/deviceRoute.js'
 import manufacturerRouter from './routes/manufacturerRoute.js'
 import distributorRouter from './routes/distributorRoute.js'
-import router from './routes/userRoute.js'
+import userRouter from './routes/userRoute.js'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -25,7 +25,7 @@ app.use(express.json())
 ConnectDb()
 
 // ✅ API Routes
-app.use('/api/auth', router)
+app.use('/api/auth', userRouter)
 app.use('/api/device', deviceRouter)
 app.use('/api/manufacturer', manufacturerRouter)
 app.use('/api/distributor', distributorRouter)
@@ -34,8 +34,8 @@ app.use('/api/distributor', distributorRouter)
 const frontendPath = path.join(__dirname, '../frontend/dist')
 app.use(express.static(frontendPath))
 
-// ✅ أي مسار آخر يعيد index.html (حل مشكلة Not Found)
-app.get('/*', (req, res) => {
+// ✅ أي مسار آخر يعيد index.html (catch-all) بدون مشاكل path-to-regexp
+app.use((req, res, next) => {
   res.sendFile(path.join(frontendPath, 'index.html'))
 })
 
