@@ -91,7 +91,7 @@ const Manufacturers = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-2">{m.name}</h2>
               <p className="text-gray-600 mb-1"><strong>Country:</strong> {m.country}</p>
               <p className="text-gray-600 mb-1">
-                <strong>Has Agent:</strong> {m.has_agent ? m.agent || "Available" : "No"}
+                <strong>Has Agent:</strong> {m.has_agent ? m.agent || "Yes" : "No"}
               </p>
               <p className="text-gray-600 mb-4 text-sm max-h-20 overflow-y-auto">{m.description || "No description"}</p>
             </div>
