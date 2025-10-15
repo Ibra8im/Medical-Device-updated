@@ -32,14 +32,14 @@ app.use('/api/distributor', distributorRouter)
 
 // ✅ React Build Path (Vite)
 const frontendPath = path.join(__dirname, '../frontend/dist')
-app.use(express.static(frontendPath))
 
-// ✅ أي مسار آخر يعيد index.html (catch-all) بدون مشاكل path-to-regexp
-app.use((req, res, next) => {
+// serve static files and fallback to index.html
+app.use(express.static(frontendPath))
+app.get('*', (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'))
 })
 
-// ✅ تشغيل السيرفر
+// تشغيل السيرفر
 app.listen(port, () => {
   console.log(`✅ Server running on port ${port}`)
 })
