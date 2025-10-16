@@ -229,6 +229,12 @@ const ManufacturerDetails = () => {
                 </h3>
                 <div className="space-y-1 text-gray-700">
                   <p>
+                    <strong>Contact Name:</strong> {s.contact_name || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Position:</strong> {s.position || "N/A"}
+                  </p>
+                  <p>
                     <strong>Email:</strong> {s.email || "N/A"}
                   </p>
                   <p>
