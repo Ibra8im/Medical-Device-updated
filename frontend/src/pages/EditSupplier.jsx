@@ -36,6 +36,8 @@ const EditSupplier = () => {
   });
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
+
 
   // ✅ جلب بيانات المورد
   useEffect(() => {
@@ -65,6 +67,7 @@ const EditSupplier = () => {
   // ✅ التحديث مع الصورة
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsDisabled(true)
     try {
       const formData = new FormData();
       formData.append("id", id);
@@ -99,6 +102,8 @@ const EditSupplier = () => {
     } catch (err) {
       console.error(err);
       toast.error("Error deleting supplier");
+    } finally {
+      setIsDisabled(false)
     }
   };
 
@@ -265,7 +270,7 @@ const EditSupplier = () => {
         <div className="flex flex-wrap gap-4 pt-4">
           <button
             type="submit"
-            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+            className={`px-6 py-3 ${isDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-gray-800"}  text-white rounded-lg  transition`}
           >
             💾 Update Supplier
           </button>

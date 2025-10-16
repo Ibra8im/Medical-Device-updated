@@ -4,7 +4,6 @@ import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import { FiTrash2, FiEdit, FiInfo } from "react-icons/fi";
 
 const Manufacturers = () => {
   const { backendUrl } = useContext(AppContext);

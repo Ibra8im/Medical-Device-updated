@@ -16,7 +16,9 @@ const EditDevice = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [categories, setCategories] = useState(category)
+  const [categories, setCategories] = useState(category);
+  const [isDisabled, setIsDisabled] = useState(false);
+
 
   const [deviceForm, setDeviceForm] = useState({
     name: '',
@@ -91,6 +93,7 @@ const EditDevice = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsDisabled(true)
     e.preventDefault();
 
     if (!deviceForm.name || !deviceForm.model) {
@@ -130,6 +133,8 @@ const EditDevice = () => {
     } catch (err) {
       console.error(err);
       toast.error('Error updating device');
+    } finally {
+      setIsDisabled(false)
     }
   };
 
@@ -371,7 +376,7 @@ const EditDevice = () => {
           <div className="mt-4 flex gap-4">
             <button
               type="submit"
-              className="flex-1 px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-100 transition shadow-md"
+              className={`flex-1 px-6 py-3 b text-white font-medium rounded-lg ${isDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-gray-800"} focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-100 transition shadow-md`}
             >
               Update Device
             </button>

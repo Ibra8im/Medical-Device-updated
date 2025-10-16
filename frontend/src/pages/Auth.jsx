@@ -4,13 +4,16 @@ import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
+import { Loader2 } from "lucide-react";
 
 
 const Auth = () => {
+
+  const imagrUrl = "https://res.cloudinary.com/dwtfs2eeu/image/upload/v1760572613/distributors/1760572612996-Banner_Testing_Microbiology-Testing_v1.jpg"
   const { backendUrl, loginUser } = useContext(AppContext);
   const navigate = useNavigate();
   const [isDisabled, setIsDisabled] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,9 +24,13 @@ const Auth = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsDisabled(true);
+    setLoading(true)
     try {
       const endpoint = isLogin ? "login" : "register";
       const { data } = await axios.post(
@@ -44,6 +51,7 @@ const Auth = () => {
       toast.error(err.response?.data?.message || err.message);
     } finally {
       setIsDisabled(false)
+      setLoading(false)
     }
   };
 
@@ -107,12 +115,23 @@ const Auth = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className={`w-full py-2.5 rounded-lg ${isDisabled ? "bg-indigo-300 cursor-not-allowed" : " bg-indigo-600  hover:bg-indigo-500 cursor-pointer"}  text-white font-semibold transition-all `}
-            >
-              {isLogin ? "Sign In" : "Register"}
-            </button>
+            {
+              loading ? (
+                <p
+
+                  className={`w-full flex items-center gap-2 justify-center py-2.5 rounded-lg ${isDisabled ? "bg-indigo-300 cursor-not-allowed" : " bg-indigo-600  hover:bg-indigo-500 cursor-pointer"}  text-white font-semibold transition-all `}
+                >
+                  <Loader2 className="animate-spin w-6 h-6 mr-2" /> Sigining in
+                </p>
+              ) : (
+                <button
+                  type="submit"
+                  className={`w-full py-2.5 rounded-lg ${isDisabled ? "bg-indigo-300 cursor-not-allowed" : " bg-indigo-600  hover:bg-indigo-500 cursor-pointer"}  text-white font-semibold transition-all `}
+                >
+                  {isLogin ? "Sign In" : "Register"}
+                </button>
+              )
+            }
           </form>
 
           <p className="text-gray-400 text-sm text-center mt-5">
@@ -130,7 +149,7 @@ const Auth = () => {
       {/* القسم الأيمن */}
       <div className="hidden lg:flex w-1/2 relative">
         <img
-          src="../src/assets/im-2.webp"
+          src={imagrUrl}
           alt="Medical equipment"
           className="absolute inset-0 w-full h-full object-cover"
         />

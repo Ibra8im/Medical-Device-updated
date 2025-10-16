@@ -143,7 +143,7 @@ const ManufacturerDetails = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-5xl mx-auto my-12 p-8 bg-white rounded-2xl shadow-lg"
+      className="max-w-5xl mx-auto my-12 mt-30 p-8 bg-white rounded-2xl shadow-lg"
     >
       {/* Header */}
       <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 mb-8 border-b pb-4">

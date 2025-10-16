@@ -13,8 +13,9 @@ import userRouter from './routes/userRoute.js'
 const app = express()
 const port = process.env.PORT || 5000
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// إعداد المسارات المطلقة
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
 
 // Middleware
 app.use(cors())
@@ -23,30 +24,24 @@ app.use(express.json())
 // اتصال بقاعدة البيانات
 ConnectDb()
 
-// API Routes
+// ✅ API Routes
 app.use('/api/auth', userRouter)
 app.use('/api/device', deviceRouter)
 app.use('/api/manufacturer', manufacturerRouter)
 app.use('/api/distributor', distributorRouter)
 
-// React Build Path داخل backend
-const frontendPath = path.join(__dirname, '../frontend/dist')
+// ✅ React Build Path (Vite)
+// const frontendPath = path.join(__dirname, '../frontend/dist')
 
-// تحقق من وجود المجلد
-import fs from 'fs'
-if (!fs.existsSync(frontendPath)) {
-  console.error('❌ frontend/dist folder not found at:', frontendPath)
-}
+// ✅ Serve static frontend files
+// app.use(express.static(frontendPath))
 
-// Serve static files
-app.use(express.static(frontendPath))
+// ✅ Catch-all route (فقط GET وليس use)
+// app.use((req, res, next) => {
+// res.sendFile(path.join(frontendPath, 'index.html'))
+// })
 
-// Catch-all route لأي مسار React Router
-app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'))
-})
-
-// تشغيل السيرفر
+// ✅ تشغيل السيرفر
 app.listen(port, () => {
   console.log(`✅ Server running on port ${port}`)
 })
